@@ -50,6 +50,30 @@ try:
     
     print(f"Path separator : {os.pathsep}")
     print(f"Separator : {os.sep}")
+    print(f"Ext separator : {os.extsep}")
+    print(f"Line separator : {os.linesep}")
+
+    '''
+    if (os.path.exists("wordlist.txt")):
+        print("File exists")
+
+    if os.path.isdir(mypath):
+        print("Is a directory")
+    
+    if os.path.isfile("wordlist.txt"):
+        print("Is a file")
+    
+    print(f"{os.path.normcase("WoRdlIst.tXt")}")
+    '''
+    # History
+    pid= os.fork()
+    if pid == 0:
+        print(f"Child process : {os.getpid()}")
+    else:
+        print(f"Parent process : {os.getpid()}")
+        os.waitpid(pid, 0)
+        print(f"Child process {pid} terminated")
+    
 
 except requests.exceptions.RequestException as ops:
     print(f"Error getting data from {http_url} : {ops}")
