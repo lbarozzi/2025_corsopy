@@ -1,4 +1,5 @@
 import os
+import sys
 import tempfile
 import os.path
 import requests
@@ -8,8 +9,8 @@ import dotenv
 http_url="https://random-word-api.herokuapp.com/word"
 
 try:
-    '''
-    p={"number":"10"}
+    #'''
+    p={"number":"10"} # occhio che number < 42
     res= requests.get(http_url, params=p)
     res.raise_for_status()
 
@@ -19,19 +20,20 @@ try:
     for w in words:
         print(w)
 
-    
+        
     tmp_file= open("wordlist.txt", "a") # default "r" #"w" write #"x" create #"a" append
     for w in words:
         tmp_file.write(w + "\n")
 
     tmp_file.close()
 
+    '''
     with tempfile.NamedTemporaryFile(delete=True, mode="w") as tmp_file:
         for w in words:
             tmp_file.write(w + "\n")
         tmp_file.flush()
         print(f"Temp file created : {tmp_file.name}")
-    '''
+    
     mypath= os.getcwd()
     print(f"Current working directory : {mypath}")
     (head,tail)= os.path.split(f"{mypath}/")
@@ -53,7 +55,10 @@ try:
     print(f"Ext separator : {os.extsep}")
     print(f"Line separator : {os.linesep}")
 
-    '''
+    print(f"{sys.getfilesystemencoding()}")
+    # sys.stdin, sys.stdout, sys.stderr
+
+    
     if (os.path.exists("wordlist.txt")):
         print("File exists")
 
@@ -65,7 +70,8 @@ try:
     
     print(f"{os.path.normcase("WoRdlIst.tXt")}")
     '''
-    # History
+
+    '''# History
     pid= os.fork()
     if pid == 0:
         print(f"Child process : {os.getpid()}")
@@ -73,7 +79,7 @@ try:
         print(f"Parent process : {os.getpid()}")
         os.waitpid(pid, 0)
         print(f"Child process {pid} terminated")
-    
+    #'''
 
 except requests.exceptions.RequestException as ops:
     print(f"Error getting data from {http_url} : {ops}")
