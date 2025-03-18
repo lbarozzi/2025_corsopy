@@ -1,0 +1,60 @@
+import os
+import sys
+import tempfile
+import os.path
+import requests
+import json
+import dotenv
+
+http_url="https://random-word-api.herokuapp.com/word"
+
+class ListReader:
+    def __init__(self,filename="wordlist.txt"):
+        self.filename=filename
+        self.wordlist=[]
+        # self.load()
+
+    def create(self, len=20000):
+        try:
+            p={"number":len} 
+            res= requests.get(http_url, params=p)
+            res.raise_for_status()
+
+            print(f"{res.status_code} - {res.reason}")
+            words = json.loads(res.text)
+            with open(self.filename, 'a') as f:
+                for word in words:
+                    f.write(f"{word}\n")
+            
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
+    
+    def load(self):
+        try:
+            with open(self.filename, 'r') as f:
+                for line in f:
+                    self.wordlist.append(line.strip())
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
+        
+    def getUnique(self):
+        tmp_list=list(dict.fromkeys(self.wordlist))
+        return (tmp_list, len(tmp_list),len(self.wordlist))
+    
+    def shortLong(self):
+        pass 
+
+def main():
+    myobj= ListReader()
+    myobj.create()
+    myobj.load()
+    print(myobj.getUnique())
+    pass 
+
+if __name__== "__main__":
+    #Do Main loop
+    main()
+    print("Done")
