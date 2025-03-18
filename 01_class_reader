@@ -47,15 +47,15 @@ class ListReader:
         return (tmp_list, len(tmp_list),len(self.wordlist))
     
     def shortLong(self):
-        #shortest word
-        #longest word
-        #mean len
+        # shortest word
+        # longest word
+        # mean len
         tmp_list,a,b= self.getUnique()
         tmp_list.sort(key=len)
-        print(f"Shortest: {tmp_list[0]} - {len(tmp_list[0])}")
+        # print(f"Shortest: {tmp_list[0]} - {len(tmp_list[0])}")
 
         tot_len = sum(len(x) for x in tmp_list)
-        print(f"Mean: {tot_len/len(tmp_list)}")
+        # print(f"Mean: {tot_len/len(tmp_list)}")
 
         return (tmp_list[0],tmp_list[-1],tot_len/len(tmp_list))
 
@@ -65,6 +65,8 @@ def main():
     myobj.load()
     (list,uni,all)=myobj.getUnique()
     print(f"Unique: {uni} - All: {all}")
+    (short,long,mean)=myobj.shortLong()
+    print(f"Shortest: {short} - Longest: {long} - Mean: {mean}")
     pass 
 
 if __name__== "__main__":
