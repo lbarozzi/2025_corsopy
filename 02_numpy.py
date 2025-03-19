@@ -141,3 +141,59 @@ print(np.lcm.reduce([x1,x2]) )
 print(np.gcd(7,21) )
 print(np.gcd.reduce([x1,x2]) ) 
 
+
+print("---- ---- "  *3)
+data= np.random.randint(1,100,size=(12,3))
+wdat= np.linspace(0,1,36).reshape(12,3)
+print(data)
+print(wdat)
+
+print(np.mean(data))
+print(np.mean(data,axis=0))
+print(np.mean(data,axis=1))
+
+print(np.median(data))
+print(np.median(data,axis=0))
+print(np.median(data,axis=1))
+
+print(np.std(data))
+print(np.std(data,axis=0))
+print(np.std(data,axis=1))
+
+print(np.min(data))
+print(np.min(data,axis=0))  
+print(np.min(data,axis=1))
+
+print(np.percentile(data,25)) #1° quartile
+print(np.percentile(data,25,axis=0))# 25% of the data
+print(np.percentile(data,25,axis=1))    
+
+pond = np.average(data,weights=wdat)
+print(pond)
+print(np.average(data,axis=0,weights=wdat))
+print(np.average(data,axis=1,weights=wdat))
+
+print("*-*" * 5)
+print(np.corrcoef(data))
+
+
+print("---*--- "*4)
+# print(np.histogram(data,bins=5))
+data= np.array([12,5,56,78,34,98])
+# print(np.histogram(data) )#,bins=50,range=(0,100)))
+
+print( np.histogram(data , bins=100 ) )# , bins=[0,1,2,3]) )
+
+# import matplotlib.pyplot as plt
+# plt.hist(data, bins=100)
+# plt.show()
+
+arr1 = np.array([1,2,3,4,5])
+arr2 = np.array([6,7,8,9,10])
+
+print(np.vstack((arr1,arr2)))
+print(np.hstack((arr1,arr2)))
+
+#Serialization
+np.savetxt("arr1.txt",arr1)
+np.loadtxt("arr1.txt")
